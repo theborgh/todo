@@ -16,6 +16,11 @@
   margin-bottom: 10px;
 }
 
+.fadeout {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
 .todo-item:hover {
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);

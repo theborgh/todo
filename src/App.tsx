@@ -73,6 +73,7 @@ const App = () => {
               name="todo"
               className="form__input"
               placeholder="Add new todo"
+              minLength={5}
             />
             <button className="form__button" type="submit">
               Add

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./Todo.css";
 
 type Props = {
@@ -13,9 +14,17 @@ type Props = {
 
 export const Todo = (props: Props) => {
   const { todo, toggleCompleted, deleteTodo } = props;
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteClick = () => {
+    setIsDeleting(true);
+    setTimeout(() => {
+      deleteTodo(todo.id);
+    }, 500);
+  };
 
   return (
-    <li className="todo-item">
+    <li className={`todo-item ${isDeleting ? "fadeout" : ""}`}>
       <input
         type="checkbox"
         title="toggle completed"
@@ -30,7 +39,7 @@ export const Todo = (props: Props) => {
       </span>
       <button
         className="todo-delete-btn"
-        onClick={() => deleteTodo(todo.id)}
+        onClick={handleDeleteClick}
         title="delete todo"
       >
         X
