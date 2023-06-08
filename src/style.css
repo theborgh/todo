@@ -1,0 +1,44 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.todo-item:last-child {
+  margin-bottom: 0;
+}
+
+.todo-text {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+}
+
+.todo-delete-btn {
+  font-weight: bold;
+  color: #d03434;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
