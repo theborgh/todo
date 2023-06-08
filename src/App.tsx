@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./style.css";
 import { Todo } from "./Todo";
+import "./style.css";
 
 type TodoItem = {
   id: number;
@@ -44,39 +44,41 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Todo List</h1>
-      <ul className="todo-list">
-        {todos.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            toggleCompleted={toggleCompleted}
-            deleteTodo={deleteTodo}
-          />
-        ))}
-      </ul>
-      <div className="form-container">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            const input = e.target.elements.todo as HTMLInputElement;
-            if (input.value.trim() !== "") {
-              addTodo(input.value.trim());
-            }
-            input.value = "";
-          }}
-        >
-          <input
-            type="text"
-            name="todo"
-            className="form__input"
-            placeholder="Add new todo"
-          />
-          <button className="form__button" type="submit">
-            Add
-          </button>
-        </form>
+    <div className="App">
+      <div className="container">
+        <h1>Todo List</h1>
+        <ul className="todo-list">
+          {todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              toggleCompleted={toggleCompleted}
+              deleteTodo={deleteTodo}
+            />
+          ))}
+        </ul>
+        <div className="form-container">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const input = e.target.elements.todo as HTMLInputElement;
+              if (input.value.trim() !== "") {
+                addTodo(input.value.trim());
+              }
+              input.value = "";
+            }}
+          >
+            <input
+              type="text"
+              name="todo"
+              className="form__input"
+              placeholder="Add new todo"
+            />
+            <button className="form__button" type="submit">
+              Add
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

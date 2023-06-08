@@ -1,11 +1,10 @@
-import React from "react";
-
 type Props = {
   todo: {
     id: number;
     text: string;
     completed: boolean;
   };
+
   toggleCompleted: (id: number) => void;
   deleteTodo: (id: number) => void;
 };
