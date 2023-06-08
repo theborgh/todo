@@ -8,11 +8,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 60px;
   padding: 10px;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+}
+
+.todo-item:hover {
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .todo-item:last-child {
@@ -26,6 +32,7 @@
 
 .todo-text.completed {
   text-decoration: line-through;
+  color: grey;
 }
 
 .todo-delete-btn {
@@ -33,6 +40,11 @@
   color: #d03434;
   background-color: transparent;
   border: none;
+  padding: 0 10px;
   cursor: pointer;
   margin-left: 10px;
+}
+
+.todo-delete-btn:hover {
+  color: #ff0000;
 }

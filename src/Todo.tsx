@@ -18,6 +18,7 @@ export const Todo = (props: Props) => {
     <li className="todo-item">
       <input
         type="checkbox"
+        title="toggle completed"
         checked={todo.completed}
         onChange={() => toggleCompleted(todo.id)}
       />
@@ -27,7 +28,11 @@ export const Todo = (props: Props) => {
       >
         {todo.text}
       </span>
-      <button className="todo-delete-btn" onClick={() => deleteTodo(todo.id)}>
+      <button
+        className="todo-delete-btn"
+        onClick={() => deleteTodo(todo.id)}
+        title="delete todo"
+      >
         X
       </button>
     </li>
