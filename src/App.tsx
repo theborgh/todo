@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Todo } from "./Todo";
-import "./style.css";
+import "./App.css";
 
 type TodoItem = {
   id: number;

@@ -1,3 +1,5 @@
+import "./Todo.css";
+
 type Props = {
   todo: {
     id: number;
