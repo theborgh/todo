@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Todo } from "../../components/Todo";
+import { Todo } from "../../components/Todo/Todo";
 import "./Todos.css";
+import Navbar from "../../components/Navbar/Navbar";
 
 type TodoItem = {
   id: number;
@@ -44,7 +45,8 @@ const Todos = () => {
   };
 
   return (
-    <div className="App">
+    <div className="Todos">
+      <Navbar />
       <div className="container">
         <h1>Todo List</h1>
         <ul className="todo-list">
