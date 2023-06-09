@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Todo } from "../../components/Todo/Todo";
-import "./Todos.css";
 import Navbar from "../../components/Navbar/Navbar";
+import "./Todos.css";
 
 type TodoItem = {
   id: number;
@@ -47,8 +47,8 @@ const Todos = () => {
   return (
     <div className="Todos">
       <Navbar />
+      <h1 className="title">Todo List</h1>
       <div className="container">
-        <h1>Todo List</h1>
         <ul className="todo-list">
           {todos.map((todo) => (
             <Todo
