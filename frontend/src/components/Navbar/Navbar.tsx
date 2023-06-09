@@ -15,9 +15,6 @@ export default function Navbar() {
         <Link to={"/todos"} className="navbar__link">
           Todos
         </Link>
-        <Link to={"/login"} className="navbar__link">
-          Login
-        </Link>
         <Link to={"/logout"} className="navbar__link">
           Logout
         </Link>
