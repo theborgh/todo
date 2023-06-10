@@ -10,50 +10,33 @@ type TodoItem = {
   completed: boolean;
 };
 
-const initialTodos: TodoItem[] = [
-  { id: 1, text: "Todo 1", completed: false },
-  { id: 2, text: "Todo 2", completed: true },
-  { id: 3, text: "Todo 3", completed: false },
-];
-
 const Todos = ({ supabase, session }) => {
-  const [todos, setTodos] = useState<TodoItem[]>(initialTodos);
+  const [todos, setTodos] = useState<TodoItem[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!session) {
       navigate("/");
     }
-  }, []);
 
-  const createOrUpdateTodo = async (todo: TodoItem) => {
-    try {
-      if (todo.id) {
-        // Update existing todo
-        const { data, error } = await supabase
-          .from("todos")
-          .update(todo)
-          .match({ id: todo.id });
+    const fetchTodos = async () => {
+      try {
+        const { data, error } = await supabase.from("todos").select("*");
         if (error) {
           throw error;
         }
-        console.log("Todo updated:", data);
-      } else {
-        // Create new todo
-        const { data, error } = await supabase.from("todos").insert([todo]);
-        if (error) {
-          throw error;
-        }
-        console.log("New todo created:", data);
+        setTodos(data || []);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
       }
-    } catch (error) {
-      console.error("Error creating/updating todo:", error);
-    }
-  };
+    };
+
+    fetchTodos();
+  }, []);
 
   const addTodo = async (text: string) => {
     const newTodo: TodoItem = {
-      id: Math.max(...todos.map((todo) => todo.id)) + 1,
+      id: todos.length ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1,
       text: text,
       completed: false,
     };
