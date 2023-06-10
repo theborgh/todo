@@ -21,13 +21,37 @@ const Todos = ({ supabase, session }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if not logged in, redirect to homepage
     if (!session) {
       navigate("/");
     }
   }, []);
 
-  const addTodo = (text: string) => {
+  const createOrUpdateTodo = async (todo: TodoItem) => {
+    try {
+      if (todo.id) {
+        // Update existing todo
+        const { data, error } = await supabase
+          .from("todos")
+          .update(todo)
+          .match({ id: todo.id });
+        if (error) {
+          throw error;
+        }
+        console.log("Todo updated:", data);
+      } else {
+        // Create new todo
+        const { data, error } = await supabase.from("todos").insert([todo]);
+        if (error) {
+          throw error;
+        }
+        console.log("New todo created:", data);
+      }
+    } catch (error) {
+      console.error("Error creating/updating todo:", error);
+    }
+  };
+
+  const addTodo = async (text: string) => {
     const newTodo: TodoItem = {
       id: Math.max(...todos.map((todo) => todo.id)) + 1,
       text: text,
@@ -35,6 +59,10 @@ const Todos = ({ supabase, session }) => {
     };
 
     setTodos([...todos, newTodo]);
+    const { data, error } = await supabase.from("todos").insert([newTodo]);
+    if (error) {
+      throw error;
+    }
   };
 
   const toggleCompleted = (id: number) => {
@@ -53,7 +81,7 @@ const Todos = ({ supabase, session }) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const editTodo = (id: number, text: string) => {
+  const editTodo = async (id: number, text: string) => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -63,6 +91,14 @@ const Todos = ({ supabase, session }) => {
         }
       })
     );
+
+    const { data, error } = await supabase
+      .from("todos")
+      .update({ text })
+      .match({ id });
+    if (error) {
+      throw error;
+    }
   };
 
   return (
