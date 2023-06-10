@@ -15,7 +15,7 @@ const initialTodos: TodoItem[] = [
   { id: 3, text: "Todo 3", completed: false },
 ];
 
-const Todos = () => {
+const Todos = ({ supabase }) => {
   const [todos, setTodos] = useState<TodoItem[]>(initialTodos);
 
   const addTodo = (text: string) => {
@@ -46,7 +46,7 @@ const Todos = () => {
 
   return (
     <div className="Todos">
-      <Navbar />
+      <Navbar supabase={supabase} />
       <h1 className="title">Todo List</h1>
       <div className="container">
         <ul className="todo-list">

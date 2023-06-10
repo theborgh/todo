@@ -5,8 +5,8 @@ import Todos from "./pages/Todos/Todos";
 import Homepage from "./pages/Homepage/Homepage";
 
 const supabase = createClient(
-  "https://pjddmrvfhqzqdeddbrtl.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqZGRtcnZmaHF6cWRlZGRicnRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMjY2MjgsImV4cCI6MjAwMTkwMjYyOH0.H7BxUHVOrGIMGRgyZDv1I4oMxYteWd4sbk1jiqtT-x4"
+  import.meta.env.VITE_SUPABASE_URL as string,
+  import.meta.env.VITE_SUPABASE_ANON_KEY as string
 );
 
 export default function App() {
@@ -29,8 +29,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" Component={Homepage}></Route>
-        <Route path="/todos" Component={Todos}></Route>
+        <Route path="/" element={<Homepage supabase={supabase} />}></Route>
+        <Route path="/todos" element={<Todos supabase={supabase} />}></Route>
       </Routes>
     </Router>
   );

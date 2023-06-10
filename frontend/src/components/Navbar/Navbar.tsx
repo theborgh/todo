@@ -1,9 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ supabase }) {
+  const navigate = useNavigate();
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log(error);
+    }
+    navigate("/");
+  };
+
   return (
     <div className="navbar">
       <div className="navbar__logo">
@@ -15,9 +25,9 @@ export default function Navbar() {
         <Link to={"/todos"} className="navbar__link">
           Todos
         </Link>
-        <Link to={"/logout"} className="navbar__link">
+        <span className="navbar__link" onClick={signOut}>
           Logout
-        </Link>
+        </span>
       </div>
     </div>
   );

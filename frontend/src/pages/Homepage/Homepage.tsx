@@ -1,26 +1,23 @@
-import Navbar from "../../components/Navbar/Navbar";
-import { createClient } from "@supabase/supabase-js";
+import { useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 import "./Homepage.css";
 
-export default function Homepage() {
+export default function Homepage({ supabase }) {
   const navigate = useNavigate();
-  const supabase = createClient(
-    import.meta.env.VITE_SUPABASE_URL as string,
-    import.meta.env.VITE_SUPABASE_ANON_KEY as string
-  );
-
-  supabase.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_IN") {
-      navigate("/todos");
-    }
-  });
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN") {
+        navigate("/todos");
+      }
+    });
+  }, []);
 
   return (
     <div className="Homepage">
-      <Navbar />
+      <Navbar supabase={supabase} />
       <h1 className="title">Log in to start using the app</h1>
 
       <div className="container">
