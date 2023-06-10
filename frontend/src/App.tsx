@@ -29,8 +29,14 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Homepage supabase={supabase} />}></Route>
-        <Route path="/todos" element={<Todos supabase={supabase} />}></Route>
+        <Route
+          path="/"
+          element={<Homepage supabase={supabase} session={session} />}
+        ></Route>
+        <Route
+          path="/todos"
+          element={<Todos supabase={supabase} session={session} />}
+        ></Route>
       </Routes>
     </Router>
   );

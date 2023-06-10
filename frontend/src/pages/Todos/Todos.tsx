@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { Todo } from "../../components/Todo/Todo";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Todos.css";
@@ -15,8 +16,16 @@ const initialTodos: TodoItem[] = [
   { id: 3, text: "Todo 3", completed: false },
 ];
 
-const Todos = ({ supabase }) => {
+const Todos = ({ supabase, session }) => {
   const [todos, setTodos] = useState<TodoItem[]>(initialTodos);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // if not logged in, redirect to homepage
+    if (!session) {
+      navigate("/");
+    }
+  }, []);
 
   const addTodo = (text: string) => {
     const newTodo: TodoItem = {
@@ -46,7 +55,7 @@ const Todos = ({ supabase }) => {
 
   return (
     <div className="Todos">
-      <Navbar supabase={supabase} />
+      <Navbar supabase={supabase} session={session} />
       <h1 className="title">Todo List</h1>
       <div className="container">
         <ul className="todo-list">

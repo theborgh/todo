@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Homepage.css";
 
-export default function Homepage({ supabase }) {
+export default function Homepage({ supabase, session }) {
   const navigate = useNavigate();
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -17,7 +17,7 @@ export default function Homepage({ supabase }) {
 
   return (
     <div className="Homepage">
-      <Navbar supabase={supabase} />
+      <Navbar supabase={supabase} session={session} />
       <h1 className="title">Log in to start using the app</h1>
 
       <div className="container">
