@@ -53,6 +53,18 @@ const Todos = ({ supabase, session }) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const editTodo = (id: number, text: string) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, text: text };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
+
   return (
     <div className="Todos">
       <Navbar supabase={supabase} session={session} />
@@ -65,6 +77,7 @@ const Todos = ({ supabase, session }) => {
               todo={todo}
               toggleCompleted={toggleCompleted}
               deleteTodo={deleteTodo}
+              editTodo={editTodo}
             />
           ))}
         </ul>
