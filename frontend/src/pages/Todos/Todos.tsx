@@ -8,6 +8,7 @@ type TodoItem = {
   id: number;
   text: string;
   completed: boolean;
+  userid: string;
 };
 
 const Todos = ({ supabase, session }) => {
@@ -39,6 +40,7 @@ const Todos = ({ supabase, session }) => {
       id: todos.length ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1,
       text: text,
       completed: false,
+      userid: session.user.id,
     };
 
     setTodos([...todos, newTodo]);

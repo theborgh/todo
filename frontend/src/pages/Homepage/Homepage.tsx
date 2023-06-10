@@ -8,8 +8,24 @@ import "./Homepage.css";
 export default function Homepage({ supabase, session }) {
   const navigate = useNavigate();
   useEffect(() => {
+    const createUserIfNotExists = async (userId: string) => {
+      try {
+        const { data, error } = await supabase
+          .from("users")
+          .upsert([{ id: userId }], { onConflict: ["id"] });
+
+        if (error) {
+          throw error;
+        }
+        console.log("User created/updated:", data);
+      } catch (error) {
+        console.error("Error creating/updating user:", error);
+      }
+    };
+
     supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN") {
+        createUserIfNotExists(session.user.id);
         navigate("/todos");
       }
     });
