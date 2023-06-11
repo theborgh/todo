@@ -61,6 +61,26 @@
   cursor: pointer;
 }
 
+.todo-icons {
+  display: flex;
+  align-items: center;
+}
+
+.todo-inputs {
+  width: 100%;
+}
+
+.todo-edit-input {
+  height: 40px;
+  width: 85%;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding-left: 10px;
+  font-size: 16px;
+  outline: none;
+  margin-right: 10px;
+}
+
 .todo-edit-btn {
   font-weight: bold;
   color: #350cc9;

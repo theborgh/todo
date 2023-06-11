@@ -78,7 +78,7 @@ export const Todo = (props: Props) => {
           </span>
         )}
       </div>
-      <div>
+      <div className="todo-icons">
         {isEditing ? (
           <button
             className="todo-save-btn"
