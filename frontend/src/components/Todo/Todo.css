@@ -53,10 +53,8 @@
 
 .todo-checkbox {
   margin-left: 0.3rem;
-  transform: scale(
-    1.5
-  ); /* Adjust the scale value to make the checkbox bigger */
-  margin-right: 10px; /* Add some spacing between the checkbox and the text */
+  transform: scale(1.5);
+  margin-right: 10px;
 }
 
 .todo-checkbox:hover {
