@@ -141,6 +141,7 @@ const Todos = ({ supabase, session }: TodosProps) => {
         </ul>
         <div className="form-container">
           <form
+            className="todos-form"
             onSubmit={(e) => {
               e.preventDefault();
               const form = e.target as HTMLFormElement;

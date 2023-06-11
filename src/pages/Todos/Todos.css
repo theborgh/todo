@@ -28,13 +28,19 @@
   align-self: center;
 }
 
+.todos-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form__input {
+  flex-grow: 1;
   height: 40px;
   width: 80%;
   border: 2px solid #ccc;
   border-radius: 4px;
   padding-left: 10px;
-  margin-left: 20px;
   font-size: 16px;
   outline: none;
 
@@ -54,8 +60,6 @@
   margin-left: 10px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
-  /* add these rules */
   border: 2px solid #888b8f;
 }
 

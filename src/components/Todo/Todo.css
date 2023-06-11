@@ -1,7 +1,7 @@
 .todo-list {
   list-style: none;
   padding: 0;
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .todo-item {
