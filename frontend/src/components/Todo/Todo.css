@@ -71,6 +71,15 @@
   margin-left: 10px;
 }
 
+.todo-save-btn {
+  font-weight: bold;
+  color: #21b91b;
+  background-color: transparent;
+  border: none;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
 .todo-delete-btn {
   font-weight: bold;
   color: #d03434;

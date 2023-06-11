@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashCan,
+  faEdit,
+  faFloppyDisk,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Todo.css";
 
 type Props = {
@@ -36,6 +40,12 @@ export const Todo = (props: Props) => {
     setEditedText(event.target.value);
   };
 
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleEditSave();
+    }
+  };
+
   const handleEditSave = () => {
     editTodo(todo.id, editedText);
     setIsEditing(false);
@@ -57,6 +67,7 @@ export const Todo = (props: Props) => {
             className="todo-edit-input"
             value={editedText}
             onChange={handleInputChange}
+            onKeyDown={handleInputKeyDown}
           />
         ) : (
           <span
@@ -74,7 +85,7 @@ export const Todo = (props: Props) => {
             onClick={handleEditSave}
             title="save todo"
           >
-            Save
+            <FontAwesomeIcon icon={faFloppyDisk} />
           </button>
         ) : (
           <button
