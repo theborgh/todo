@@ -51,6 +51,16 @@
   color: grey;
 }
 
+.todo-edit-btn {
+  font-weight: bold;
+  color: #350cc9;
+  background-color: transparent;
+  border: none;
+  padding: 0 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .todo-delete-btn {
   font-weight: bold;
   color: #d03434;
@@ -58,7 +68,6 @@
   border: none;
   padding: 0 10px;
   cursor: pointer;
-  margin-left: 10px;
 }
 
 .todo-delete-btn:hover {

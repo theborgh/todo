@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./Todo.css";
 
 type Props = {
@@ -41,51 +43,55 @@ export const Todo = (props: Props) => {
 
   return (
     <li className={`todo-item ${isDeleting ? "fadeout" : ""}`}>
-      <input
-        type="checkbox"
-        title="toggle completed"
-        checked={todo.completed}
-        onChange={() => toggleCompleted(todo.id)}
-      />
-      {isEditing ? (
+      <div className="todo-inputs">
         <input
-          type="text"
-          className="todo-edit-input"
-          value={editedText}
-          onChange={handleInputChange}
+          type="checkbox"
+          title="toggle completed"
+          checked={todo.completed}
+          onChange={() => toggleCompleted(todo.id)}
         />
-      ) : (
-        <span
-          className={todo.completed ? "todo-text completed" : "todo-text"}
-          onClick={() => toggleCompleted(todo.id)}
-        >
-          {todo.text}
-        </span>
-      )}
-      {isEditing ? (
+        {isEditing ? (
+          <input
+            type="text"
+            className="todo-edit-input"
+            value={editedText}
+            onChange={handleInputChange}
+          />
+        ) : (
+          <span
+            className={todo.completed ? "todo-text completed" : "todo-text"}
+            onClick={() => toggleCompleted(todo.id)}
+          >
+            {todo.text}
+          </span>
+        )}
+      </div>
+      <div>
+        {isEditing ? (
+          <button
+            className="todo-save-btn"
+            onClick={handleEditSave}
+            title="save todo"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            className="todo-edit-btn"
+            onClick={handleEditClick}
+            title="edit todo"
+          >
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+        )}
         <button
-          className="todo-save-btn"
-          onClick={handleEditSave}
-          title="save todo"
+          className="todo-delete-btn"
+          onClick={handleDeleteClick}
+          title="delete todo"
         >
-          Save
+          <FontAwesomeIcon icon={faTrashCan} />
         </button>
-      ) : (
-        <button
-          className="todo-edit-btn"
-          onClick={handleEditClick}
-          title="edit todo"
-        >
-          Edit
-        </button>
-      )}
-      <button
-        className="todo-delete-btn"
-        onClick={handleDeleteClick}
-        title="delete todo"
-      >
-        X
-      </button>
+      </div>
     </li>
   );
 };
