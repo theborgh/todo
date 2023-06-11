@@ -127,7 +127,7 @@ const Todos = ({ supabase, session }: TodosProps) => {
     <div className="Todos">
       <Navbar supabase={supabase} session={session} />
       <h1 className="title">My Todos</h1>
-      <div className="container">
+      <div className="todos-container">
         <ul className="todo-list">
           {todos.map((todo) => (
             <Todo

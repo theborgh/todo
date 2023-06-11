@@ -52,8 +52,8 @@
 }
 
 .todo-checkbox {
-  margin-left: 0.3rem;
-  transform: scale(1.5);
+  margin-left: 0.4rem;
+  transform: scale(1.7);
   margin-right: 10px;
 }
 
@@ -71,6 +71,10 @@
   margin-left: 10px;
 }
 
+.todo-edit-btn:hover {
+  color: #0c48c9;
+}
+
 .todo-save-btn {
   font-weight: bold;
   color: #21b91b;
@@ -78,6 +82,10 @@
   border: none;
   padding: 0 10px;
   cursor: pointer;
+}
+
+.todo-save-btn:hover {
+  color: #13974e;
 }
 
 .todo-delete-btn {
