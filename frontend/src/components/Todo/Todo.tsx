@@ -45,6 +45,7 @@ export const Todo = (props: Props) => {
     <li className={`todo-item ${isDeleting ? "fadeout" : ""}`}>
       <div className="todo-inputs">
         <input
+          className="todo-checkbox"
           type="checkbox"
           title="toggle completed"
           checked={todo.completed}
