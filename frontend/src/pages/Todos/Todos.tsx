@@ -44,26 +44,54 @@ const Todos = ({ supabase, session }) => {
     };
 
     setTodos([...todos, newTodo]);
-    const { data, error } = await supabase.from("todos").insert([newTodo]);
+    const { error } = await supabase.from("todos").insert([newTodo]);
     if (error) {
       throw error;
     }
   };
 
-  const toggleCompleted = (id: number) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        } else {
-          return todo;
-        }
-      })
-    );
+  const toggleCompleted = async (id: number) => {
+    try {
+      const todoToUpdate = todos.find((todo) => todo.id === id);
+      if (!todoToUpdate) {
+        return;
+      }
+
+      const { error } = await supabase
+        .from("todos")
+        .update({ completed: !todoToUpdate.completed })
+        .match({ id });
+
+      if (error) {
+        throw error;
+      }
+
+      setTodos(
+        todos.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, completed: !todoToUpdate.completed };
+          } else {
+            return todo;
+          }
+        })
+      );
+    } catch (error) {
+      console.error("Error updating todo:", error);
+    }
   };
 
-  const deleteTodo = (id: number) => {
+  const deleteTodo = async (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+
+    try {
+      const { error } = await supabase.from("todos").delete().eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
   };
 
   const editTodo = async (id: number, text: string) => {
@@ -77,7 +105,7 @@ const Todos = ({ supabase, session }) => {
       })
     );
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("todos")
       .update({ text })
       .match({ id });
@@ -106,7 +134,10 @@ const Todos = ({ supabase, session }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              const input = e.target.elements.todo as HTMLInputElement;
+              const form = e.target as HTMLFormElement;
+              const input = form.querySelector(
+                'input[name="todo"]'
+              ) as HTMLInputElement;
               if (input.value.trim() !== "") {
                 addTodo(input.value.trim());
               }

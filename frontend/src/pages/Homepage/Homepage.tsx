@@ -10,14 +10,13 @@ export default function Homepage({ supabase, session }) {
   useEffect(() => {
     const createUserIfNotExists = async (userId: string) => {
       try {
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from("users")
           .upsert([{ id: userId }], { onConflict: ["id"] });
 
         if (error) {
           throw error;
         }
-        console.log("User created/updated:", data);
       } catch (error) {
         console.error("Error creating/updating user:", error);
       }
