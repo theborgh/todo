@@ -28,7 +28,10 @@ const Todos = ({ supabase, session }: TodosProps) => {
 
     const fetchTodos = async () => {
       try {
-        const { data, error } = await supabase.from("todos").select("*");
+        const { data, error } = await supabase
+          .from("todos")
+          .select("*")
+          .eq("userid", session.user.id);
         if (error) {
           throw error;
         }
