@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { SupabaseClient, Session } from "@supabase/supabase-js";
 import logo from "../../assets/logo.png";
 import "./Navbar.css";
 
-export default function Navbar({ supabase, session }) {
+interface NavbarProps {
+  supabase: SupabaseClient;
+  session: Session;
+}
+
+export default function Navbar({ supabase, session }: NavbarProps) {
   const navigate = useNavigate();
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();

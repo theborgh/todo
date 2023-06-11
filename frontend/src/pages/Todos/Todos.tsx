@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { SupabaseClient, Session } from "@supabase/supabase-js";
 import { Todo } from "../../components/Todo/Todo";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Todos.css";
@@ -11,7 +12,12 @@ type TodoItem = {
   userid: string;
 };
 
-const Todos = ({ supabase, session }) => {
+interface TodosProps {
+  supabase: SupabaseClient;
+  session: Session;
+}
+
+const Todos = ({ supabase, session }: TodosProps) => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const navigate = useNavigate();
 
@@ -26,7 +32,7 @@ const Todos = ({ supabase, session }) => {
         if (error) {
           throw error;
         }
-        setTodos(data || []);
+        setTodos((data as TodoItem[]) || []);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
