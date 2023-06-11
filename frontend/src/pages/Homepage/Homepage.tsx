@@ -1,18 +1,24 @@
 import { useEffect } from "react";
+import { SupabaseClient, Session } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Homepage.css";
 
-export default function Homepage({ supabase, session }) {
+interface HomepageProps {
+  supabase: SupabaseClient;
+  session: Session;
+}
+
+export default function Homepage({ supabase, session }: HomepageProps) {
   const navigate = useNavigate();
   useEffect(() => {
     const createUserIfNotExists = async (userId: string) => {
       try {
         const { error } = await supabase
           .from("users")
-          .upsert([{ id: userId }], { onConflict: ["id"] });
+          .upsert([{ id: userId }], { onConflict: "id" });
 
         if (error) {
           throw error;
@@ -23,7 +29,7 @@ export default function Homepage({ supabase, session }) {
     };
 
     supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
+      if (event === "SIGNED_IN" && session && session.user) {
         createUserIfNotExists(session.user.id);
         navigate("/todos");
       }
