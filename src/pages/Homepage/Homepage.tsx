@@ -41,7 +41,7 @@ export default function Homepage({ supabase, session }: HomepageProps) {
       <Navbar supabase={supabase} session={session} />
       <h1 className="title">Log in to start using the app</h1>
 
-      <div className="container">
+      <div className="login-container">
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}

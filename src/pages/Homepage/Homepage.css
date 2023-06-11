@@ -5,9 +5,21 @@
   justify-content: center;
 }
 
-.container {
-  width: 500px;
+.login-container {
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .login-container {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login-container {
+    width: 500px;
+  }
 }
